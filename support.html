@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پشتیبانی محصولات - فروشگاه دیجیتال</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="support-style.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="nmn1.html" class="logo">
+                    <i class="fas fa-laptop"></i>
+                    دیجی استور
+                </a>
+                
+                <div class="container">
+                    <nav class="navbar">
+                        <div class="nav-links">
+                            <a href="index.html">خانه</a>
+                            <a href="index.html">محصولات</a>
+                            <a href="admin.html" target="_blank">پنل مدیریت</a>
+                            <a href="chat.html" id="chat-link" target="_blank">پشتیبانی آنلاین</a>
+                            <a href="support.html" target="_blank">پشتیبانی</a>
+                            <a href="cart.html" id="cart-link" target="_blank">
+                                <i class="fas fa-shopping-cart"></i>
+                                سبد خرید (<span class="cart-count">0</span>)
+                            </a>
+                            <button id="theme-toggle" class="theme-btn">🌙/☀️</button>
+                        </div>
+                    </nav>
+        
+        <div class="support-container">
+            <div class="support-header">
+                <h1><i class="fas fa-headset"></i> پشتیبانی محصولات</h1>
+                <p>ما اینجا هستیم تا به شما کمک کنیم. هر سوال یا مشکلی دارید، با خیال راحت با ما در میان بگذارید.</p>
+            </div>
+            
+            <div class="support-grid">
+                <div class="support-card">
+                    <h3><i class="fas fa-phone"></i> راه‌های تماس</h3>
+                    <ul>
+                        <li><i class="fas fa-mobile-alt"></i> همراه: ۰۹۹۹۹۱۲۳۹۸۶</li>
+                        <li><i class="fas fa-envelope"></i> ایمیل: mohhammad34535@gmail.com</li>
+                        <li><i class="fab fa-telegram"></i> تلگرام: @Mohammad_amin_trb </li>
+                    </ul>
+                </div>
+                
+                <div class="support-card">
+                    <h3><i class="fas fa-clock"></i> ساعات کاری</h3>
+                    <ul>
+                        <li><i class="fas fa-calendar-day"></i> شنبه 14:30 تا 23:30</li>
+                        <li><i class="fas fa-calendar-day"></i> تمامی ایام هفته بجز شنبه و پنجشنبه 14 تا 23:30 </li>
+                        <li><i class="fas fa-calendar-times"></i> پنجشنبه 12 ظهر تا 24 بامداد</li>
+                        <li><i class="fas fa-headset"></i> پشتیبانی آنلاین: ۲۴/۷</li>
+                    </ul>
+                </div>
+                
+                <div class="support-card">
+                    <h3><i class="fas fa-shield-alt"></i> خدمات گارانتی</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> گارانتی ۱۸ ماهه محصولات</li>
+                        <li><i class="fas fa-check"></i> پشتیبانی فنی رایگان</li>
+                        <li><i class="fas fa-check"></i> تعمیرات در محل</li>
+                        <li><i class="fas fa-check"></i> تعویض در ۷ روز اول</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="ticket-system">
+                <h2><i class="fas fa-ticket-alt"></i> سیستم تیکت پشتیبانی</h2>
+                <form id="ticketForm" class="ticket-form" onsubmit="submitTicket(event)">
+                    <div class="form-group">
+                        <label for="ticketTitle">عنوان درخواست *</label>

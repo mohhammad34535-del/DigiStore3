@@ -1,0 +1,65 @@
+.admin-panel {
+    background: rgba(10, 10, 10, 0.95);
+    padding: 40px;
+    border-radius: 15px;
+    border: 2px solid #C5A100;
+    margin: 60px auto;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(197, 161, 0, 0.3);
+}
+
+.admin-panel h2 {
+    color: #FFD700;
+    margin-bottom: 25px;
+}
+
+.field {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.field input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background: #1a1a1a;
+    color: #fff;
+    outline: none;
+}
+
+.field #toggleEye {
+    position: absolute;
+    left: 10px;
+    top: 15px;
+    color: #FFD700;
+    cursor: pointer;
+}
+
+.main-btn {
+    background: #FFD700;
+    color: #000;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.main-btn:hover {
+    background: #C5A100;
+}
+
+.list-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px dashed #FFD700;
+}
+
+.list-section h3 {
+    color: #FFD700;
+    margin-bottom: 15px;
+}

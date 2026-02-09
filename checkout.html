@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تسویه حساب - فروشگاه دیجیتال</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-laptop"></i>
+                    دیجی استور
+                </a>
+                
+                <div class="container">
+                    <nav class="navbar">
+                        <div class="nav-links">
+                            <a href="index.html">خانه</a>
+                            <a href="index.html">محصولات</a>
+                            <a href="admin.html" target="_blank">پنل مدیریت</a>
+                            <a href="chat.html" id="chat-link" target="_blank">پشتیبانی آنلاین</a>
+                            <a href="support.html" target="_blank">پشتیبانی</a>
+                            <a href="cart.html" id="cart-link" target="_blank">
+                                <i class="fas fa-shopping-cart"></i>
+                                سبد خرید (<span class="cart-count">0</span>)
+                            </a>
+                            <button id="theme-toggle" class="theme-btn">🌙/☀️</button>
+                        </div>
+                    </nav>
+        <div style="max-width: 800px; margin: 40px auto; padding: 20px;">
+            <h1 style="color: #FFD700; text-align: center; margin-bottom: 30px;">تسویه حساب</h1>
+            
+            <div style="background: rgba(10, 10, 10, 0.8); padding: 30px; border-radius: 10px; border: 2px solid #C5A100;">
+                <h3 style="color: #FFD700; margin-bottom: 20px;">جزئیات سفارش</h3>
+                <div id="order-summary"></div>
+                
+                <h3 style="color: #FFD700; margin: 30px 0 20px;">مشخصات گیرنده</h3>
+                <div style="display: grid; gap: 15px;">
+                    <input type="text" id="fullname" placeholder="نام کامل" style="padding: 12px; border-radius: 6px; border: 1px solid #444; background: #1a1a1a; color: #fff;">
+                    <input type="text" id="phone" placeholder="شماره تلفن" style="padding: 12px; border-radius: 6px; border: 1px solid #444; background: #1a1a1a; color: #fff;">
+                    <input type="text" id="address" placeholder="آدرس کامل" style="padding: 12px; border-radius: 6px; border: 1px solid #444; background: #1a1a1a; color: #fff;">
+                    <textarea id="notes" placeholder="یادداشت (اختیاری)" rows="3" style="padding: 12px; border-radius: 6px; border: 1px solid #444; background: #1a1a1a; color: #fff; resize: vertical;"></textarea>
+                </div>
+                
+                <button onclick="completeOrder()" style="background: #FFD700; color: #000; border: none; padding: 15px; border-radius: 6px; font-weight: bold; width: 100%; cursor: pointer; margin-top: 30px; font-size: 18px;">
+                    تکمیل سفارش و پرداخت
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        var cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        function loadOrderSummary() {
+            var summary = document.getElementById('order-summary');
+            var subtotal = 0;
+            
+            cart.forEach(item => {
+                var priceNum = parseInt(item.price.replace(/,/g, ''));
+                subtotal += priceNum * item.quantity;
+            });
+            
+            summary.innerHTML = `
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin: 10px 0; color: #ddd;">
+                        <span>تعداد کالاها:</span>
+                        <span>${cart.reduce((sum, item) => sum + item.quantity, 0)} عدد</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 10px 0; color: #ddd;">
+<span>قیمت کل:</span>
+                        <span>${subtotal.toLocaleString()} تومان</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 20px 0; font-size: 20px; font-weight: bold; color: #FFD700;">
+                        <span>مبلغ قابل پرداخت:</span>
+                        <span>${subtotal.toLocaleString()} تومان</span>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function completeOrder() {
+            var fullname = document.getElementById('fullname').value;
+            var phone = document.getElementById('phone').value;
+            var address = document.getElementById('address').value;
+            
+            if (!fullname || !phone || !address) {
+                alert('لطفا تمام اطلاعات ضروری را وارد کنید');
+                return;
+            }
+            
+            var order = {
+                id: Date.now(),
+                date: new Date().toLocaleString('fa-IR'),
+                items: cart,
+                customer: { fullname, phone, address },
+                notes: document.getElementById('notes').value,
+                status: 'pending',
+                total: cart.reduce((sum, item) => sum + (parseInt(item.price.replace(/,/g, '')) * item.quantity), 0)
+            };
+            
+            var orders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders.push(order);
+            localStorage.setItem('orders', JSON.stringify(orders));
+            
+            localStorage.removeItem('cart');
+            cart = [];
+            updateCartCount();
+            
+            alert('سفارش شما با موفقیت ثبت شد! شماره سفارش: ' + order.id);
+            window.location.href = 'index.html';
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            if (cart.length === 0) {
+                alert('سبد خرید شما خالی است');
+                window.location.href = 'cart.html';
+                return;
+            }
+            loadOrderSummary();
+            updateCartCount();
+        });
+    </script>
+</body>
+
+</html>

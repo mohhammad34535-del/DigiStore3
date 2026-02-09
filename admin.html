@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>پنل مدیریت</title>
+<style>
+    body { background:#121212; color:white; font-family:sans-serif; text-align:center; padding:50px; }
+    .box { background:#1e1e1e; padding:30px; border-radius:15px; border:1px solid #FFD700; display:inline-block; width:350px; }
+    input, textarea { width:90%; padding:12px; margin:10px 0; border-radius:8px; border:none; }
+    .main-btn { background:#FFD700; color:black; border:none; padding:10px 25px; cursor:pointer; font-weight:bold; border-radius:5px; width:100%; }
+    #uploadArea { display:none; margin-top:20px; }
+    .product-card { background:#222; padding:10px; margin:10px; border-radius:5px; border-right:4px solid #FFD700; text-align:right; position:relative; }
+    .delete-btn { background:red; color:white; border:none; padding:5px; cursor:pointer; position:absolute; left:10px; top:10px; }
+</style>
+</head>
+
+<body>
+
+<div id="loginBox" class="box">
+    <h2 style="color:#FFD700;">ورود به مدیریت</h2>
+    <input type="password" id="adminPass" placeholder="رمز عبور">
+    <p>سوال امنیتی: ۵ + ۲ چند می‌شود؟</p>
+    <input type="number" id="ans" placeholder="پاسخ را وارد کنید">
+    <button id="loginBtn" class="main-btn">تایید ورود</button>
+</div>
+
+<div id="uploadArea">
+    <div class="box" style="width:500px;">
+        <h3>افزودن کالا</h3>
+        <input type="text" id="newName" placeholder="نام کالا">
+        <input type="number" id="newPrice" placeholder="قیمت">
+        <textarea id="newDesc" placeholder="توضیحات"></textarea>
+        <input type="file" id="newImgFile" accept="image/*">
+        <button id="saveBtn" class="main-btn" style="background:#28a745; color:white;">
+            ذخیره محصول
+        </button>
+    </div>
+
+    <div id="admin-product-list" style="margin-top:30px; width:500px; display:inline-block;"></div>
+</div>
+
+<script>
+/* =======================
+   Login
+======================= */
+document.getElementById('loginBtn').addEventListener('click', () => {
+    const pass = document.getElementById('adminPass').value;
+    const ans = document.getElementById('ans').value;
+
+    if (pass === "1234" && ans === "7") {
+        loginBox.style.display = 'none';
+        uploadArea.style.display = 'block';
+        renderAdminProducts();
+    } else {
+        alert("رمز عبور یا کپچا اشتباه است!");
+    }
+});
+
+/* =======================
+   Render Admin Products
+======================= */
+function renderAdminProducts() {
+    const list = document.getElementById('admin-product-list');
+    const products = JSON.parse(localStorage.getItem('myProducts')) || [];
+
+    list.innerHTML = '<h3>لیست محصولات</h3>';
+
+    products.forEach((p, index) => {
+        list.innerHTML += `
+            <div class="product-card">
+                <b>${p.name}</b> - ${Number(p.price).toLocaleString()} تومان
+                <br>
+                ${p.image ? `<img src="${p.image}" width="80" style="margin-top:5px;">` : ''}
+                <button class="delete-btn" onclick="deleteProduct(${index})">حذف</button>
+            </div>
+        `;
+    });
+}
+
+/* =======================
+   Save Product (FIXED)
+======================= */
+document.getElementById('saveBtn').addEventListener('click', () => {
+    const n = newName.value.trim();
+    const p = newPrice.value.trim();
+    const d = newDesc.value.trim();
+    const f = newImgFile.files[0];
+
+    if (!n || !p || !f) {
+        alert("تمام فیلدها را پر کنید");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = e => {
+        const products = JSON.parse(localStorage.getItem('myProducts')) || [];
+
+        products.push({
+            id: Date.now(),
+            name: n,
+            price: Number(p),
+            desc: d,
+            image: e.target.result   // ← کلید درست
+        });
+
+        localStorage.setItem('myProducts', JSON.stringify(products));
+        alert("محصول ذخیره شد");
+        renderAdminProducts();
+        newName.value = newPrice.value = newDesc.value = newImgFile.value = '';
+    };
+    reader.readAsDataURL(f);
+});
+
+/* =======================
+   Delete
+======================= */
+function deleteProduct(index) {
+    const products = JSON.parse(localStorage.getItem('myProducts')) || [];
+    products.splice(index, 1);
+    localStorage.setItem('myProducts', JSON.stringify(products));
+    renderAdminProducts();
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروشگاه محصولات دیجیتال | لپ تاپ گیمینگ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            direction: rtl;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- نمایش نام کاربر (اختیاری) -->
+        <div id="user-display" style="color: var(--gold); font-weight:bold;"></div>
+
+        <!-- Navbar -->
+        <nav class="navbar">
+            <a href="index.html" class="logo"><i class="fas fa-gamepad"></i> دیجی استور</a>
+            <div class="nav-links">
+                <form id="searchForm">
+                    <input type="text" id="searchInput" placeholder="جستجوی محصول...">
+                </form>
+                <p id="no-product" style="display:none;">محصولی پیدا نشد!</p>  
+
+                <a href="login.html" target="_blank" rel="noopener noreferrer">
+                    <button id="loginBtn" type="button"><i class="fas fa-user"></i> ورود</button>
+                </a>                             
+                <a href="index.html">خانه</a>
+                <a href="#product-list">محصولات</a>
+                <a href="admin.html" target="_blank" rel="noopener noreferrer">پنل مدیریت</a>
+                <a href="chat.html" id="chat-link" target="_blank" rel="noopener noreferrer">پشتیبانی آنلاین</a>
+                <a href="support.html" target="_blank" rel="noopener noreferrer">پشتیبانی</a>
+                <a href="cart.html" id="cart-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-shopping-cart"></i>
+                    سبد خرید (<span class="cart-count">0</span>)
+                </a>
+                <button id="theme-toggle" class="theme-btn" type="button">🌙/☀️</button>
+            </div>
+        </nav>
+
+        <!-- Header -->
+        <header>
+            <h1>فروشگاه تخصصی محصولات دیجیتال</h1>
+            <p class="subtitle">این سایت نمونه است و هیچگونه کالایی در انبار وجود ندارد!</p>
+        </header>
+
+<br><br>
+
+        <!-- Gallery / محصولات -->
+        <div class="gallery" id="product-list"></div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>درباره ما</h3>
+                    <p>قسمت فروش سایت بسته است!</p>
+                </div>
+                <div class="footer-section">
+                    <h3>لینک‌های مفید</h3>
+                    <a href="index.html">خانه</a>
+                    <a href="support.html" target="_blank" rel="noopener noreferrer">پشتیبانی</a>
+                    <a href="cart.html" target="_blank" rel="noopener noreferrer">سبد خرید</a>
+                    <a href="admin.html" target="_blank" rel="noopener noreferrer">پنل مدیریت</a>
+                </div>
+                <div class="footer-section">
+                    <h3>تماس با ما</h3>
+                    <p><i class="fas fa-phone"></i> 09999123986</p>
+                </div>
+            </div>
+
+            <div class="social-icons">
+                <a href="#" aria-label="اینستاگرام"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="تلگرام"><i class="fab fa-telegram"></i></a>
+                <a href="#" aria-label="توییتر"><i class="fab fa-twitter"></i></a>
+            </div>
+
+            <div class="copyright">
+                <p>تمامی حقوق متعلق به محمد امین ترابی و امیر محمد لطفی می‌باشد &copy; 2026</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
