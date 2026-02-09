@@ -36,7 +36,7 @@ body.light {
 
 /* تم شب */
 body.dark {
-    background: image(backgrand1.jpg)
+    background: image(backgrand1)
 
 }
 
@@ -407,4 +407,3 @@ footer {
     .gallery-item { width: calc(50% - 6px); }
     .nav-links { flex-wrap: wrap; justify-content: center; gap: 15px; }
 }
-
